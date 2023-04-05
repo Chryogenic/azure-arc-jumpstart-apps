@@ -24,7 +24,7 @@
           </li>
         </ul>
         <form class="d-flex" role="checkout">
-          <a href="{{ url_for('cart') }}" id="checkout-btn" class="btn bg-green px-4 text-white rounded-1 d-flex justify-content-between" type="submit">
+          <a href="{{ url_for('cart') }}" id="checkout-btn" class="btn border-radius-xs bg-green px-4 text-white d-flex justify-content-between" type="submit">
             <div class="me-5">
               <span>Items:</span>
               <span id="cart-count"></span>
@@ -35,6 +35,9 @@
             </div>
           </a>
         </form>
+        <a href="#" class="ms-5">
+          <img src="static/img/icon_profile.svg" alt="">
+        </a>
       </div>
     </div>
 </nav>
