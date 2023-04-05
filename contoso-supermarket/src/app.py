@@ -30,6 +30,7 @@ dbconfig = {
 }
 
 conn = psycopg2.connect(**dbconfig)
+conn.autocommit= True
 cursor = conn.cursor()
 
 @app.route('/')

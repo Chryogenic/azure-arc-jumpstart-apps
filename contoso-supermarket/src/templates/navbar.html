@@ -17,11 +17,14 @@
             <a class="nav-link text-white {% if active_page == 'products' %}selected{% endif %}" href="{{ url_for('inventory') }}">Products</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link text-white {% if active_page == 'cart' %}selected{% endif %}" href="{{ url_for('cart') }}">Cart</a>
+          </li>
+          <!-- <li class="nav-item">
             <a class="nav-link text-white disabled {% if active_page == 'orders' %}selected{% endif %}" href="{{ url_for('index') }}">Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white disabled {% if active_page == 'dashboard' %}selected{% endif %}" href="#" >Dashboard</a>
-          </li>
+          </li> -->
         </ul>
         <form class="d-flex" role="checkout">
           <a href="{{ url_for('cart') }}" id="checkout-btn" class="btn border-radius-xs bg-green px-4 text-white d-flex justify-content-between" type="submit">

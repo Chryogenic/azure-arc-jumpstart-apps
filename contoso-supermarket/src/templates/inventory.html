@@ -2,34 +2,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Product List: </h1></br>
+<h1 class="text-green mb-4">Product List</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for item in inventorylist %}
+      <tr class="border-grey border-2">
+        <td class="fs-5">{{ item.id }}</td>
+        <td class="fs-5" contenteditable="true">{{ item.name }}</td>
+        <td class="fs-5" contenteditable="true">{{ item.name }}</td>
+        <td class="fs-5" contenteditable="true">{{ item.price }}</td>
+        <td>
+          <button type="button" class="btn btn-primary" data-id="{{ item.id }}">Save</button>
+          <button type="button" class="btn btn-danger" data-id="{{ item.id }}">Delete</button>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in inventorylist %}
-        <tr>
-          <td>{{ item.id }}</td>
-          <td contenteditable="true">{{ item.name }}</td>
-          <td contenteditable="true">{{ item.price }}</td>
-          <td>
-            <button type="button" class="btn btn-primary" data-id="{{ item.id }}">Save</button>
-            <button type="button" class="btn btn-danger" data-id="{{ item.id }}">Delete</button>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-
-  <script src="static/js/products.js"></script>
-</body>
+<script src="static/js/products.js"></script>
 
 {% endblock %}

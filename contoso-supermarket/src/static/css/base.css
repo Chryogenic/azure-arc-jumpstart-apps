@@ -23,3 +23,11 @@ body{
 .border-radius-xs{
     border-radius: 0.1rem!important;
 }
+.border-none{
+    border-color: #F0F0F0!important;
+}
+
+/* table overrides */
+[contentEditable=true]{
+    /* background-color: #FFF!; */
+}
