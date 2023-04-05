@@ -2,7 +2,7 @@
 from importlib import import_module
 import os
 import cv2
-from flask import Flask, render_template, Response, request, session, redirect, url_for
+from flask import Flask, render_template, Response, request, session, redirect, url_for, jsonify
 from flask_session import Session
 import secrets
 from sqlConnector import SqlConnector
@@ -139,14 +139,23 @@ def add_to_cart():
         'name': product_name,
         'price': product_price
     }
-
     # Add the item to the shopping cart session
     if 'cart' not in session:
         session['cart'] = []
-    session['cart'].append(item)
+    
+    item_found = False
+    # Check if the item is already in the cart
+    for existing_item in session['cart']:
+        # If it is, increment the quantity
+        if existing_item['id'] == item['id']:
+            existing_item['quantity'] += 1
+            item_found = True
 
-    # Redirect back to the homepage
-    return redirect('/')
+    # If not, add it to the cart
+    if not item_found:
+        session['cart'].append(item)
+
+    return jsonify(session['cart'])
 
 @app.route('/cart')
 def cart():
