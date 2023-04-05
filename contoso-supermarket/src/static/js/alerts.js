@@ -10,6 +10,11 @@
       '</div>'
     ].join('')
 
+    // Fade out the alert after 2 seconds
+    setTimeout(() => {
+      $(wrapper).fadeOut(1000);
+    }, 2000);
+
     alertPlaceholder.append(wrapper)
   }
 
@@ -27,7 +32,13 @@
           product_price: product_price
          },
         success: function(response){
-          //alert(response);
+          // update cart count and cart value
+          var cart = response;
+          var itemCount = cart.map(item => item.quantity).reduce((a, b) => a + b, 0);
+          var cartTotal = cart.map(item => item.price.replace("$","") * item.quantity).reduce((a, b) => a + b, 0); //TODO - update when price is not a string
+          
+          $("#cart-count").text(itemCount)
+          $("#cart-value").text("$" + cartTotal.toFixed(2))
         },
         error: function(xhr){
           alert("An error occured: " + xhr.status + " " + xhr.statusText);

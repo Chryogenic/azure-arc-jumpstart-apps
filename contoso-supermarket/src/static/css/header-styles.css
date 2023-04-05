@@ -1,0 +1,8 @@
+/* navbar styles */
+.navbar .nav-link{
+    font-size: 1.4rem;
+}
+.navbar .nav-link.selected{
+    color: #51B60D!important;
+    font-weight: 600;
+}

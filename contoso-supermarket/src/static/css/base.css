@@ -1,0 +1,17 @@
+/* base styles for the site */
+
+/* page background color */
+body{
+    background-color: #F0F0F0;
+}
+
+/* color overrides */
+.text-green{
+    color: #51B60D!important;
+}
+.bg-green{
+    background-color: #51B60D!important;
+}
+.bg-green.btn:hover{
+    background-color: #2e6907!important;
+}
