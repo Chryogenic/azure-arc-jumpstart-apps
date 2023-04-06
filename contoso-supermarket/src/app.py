@@ -16,8 +16,7 @@ app.secret_key = secrets.token_hex(16)
 app.config["SESSION_PERMANENT"] = False
 app.config['SESSION_TYPE'] = "filesystem"
 Session(app)
-#storeid = 1
-storeid = os.environ.get('STORE_ID')
+storeid = os.environ.get('STORE_ID', 1)
 dbconfig = {
     "host": os.environ.get('SQL_HOST'),
     "user": os.environ.get('SQL_USERNAME'),
@@ -69,7 +68,7 @@ def inventory():
     try:
         cur = conn.cursor()
         inventorylist = []
-        query = "SELECT * from contoso.products"
+        query = "SELECT * from contoso.products order by productId"
         cur.execute(query)
         for item in cur.fetchall():
             inventorylist.append({
@@ -138,7 +137,7 @@ def add_to_cart():
         'id': product_id,
         'quantity': quantity,
         'name': product_name,
-        'price': product_price
+        'price': float(product_price)
     }
     # Add the item to the shopping cart session
     if 'cart' not in session:
@@ -161,16 +160,8 @@ def add_to_cart():
 @app.route('/cart')
 def cart():
     # Get the cart data from the session
-    summary = {}
     cart = session.get('cart', [])
-    for item in cart:
-        id = item['id']
-        quantity = item['quantity']
-        if id in summary:
-            summary[id] += quantity
-        else:
-            summary[id] = quantity
-    # print (summary)
+
     # Render the shopping cart template with the cart data
     return render_template('cart.html', cart=cart)
 
@@ -179,7 +170,6 @@ def checkout():
 
     cur = conn.cursor()
     cart = session.get('cart', [])
-    #orderDate = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     orderDate = datetime.now()
     jsoncart = json.dumps(cart)
     query = "INSERT INTO contoso.Orders (orderDate, orderdetails, storeId) VALUES ('{}', '{}', {}) returning orderId".format(orderDate, jsoncart, storeid)

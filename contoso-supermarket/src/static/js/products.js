@@ -3,23 +3,28 @@ $(document).ready(function() {
     $('.btn-primary').click(function() {
         var id = $(this).data('id');
         var name = $('td:eq(1)', $(this).parent().parent()).text();
-        var price = $('td:eq(2)', $(this).parent().parent()).text();
-        
-        $.ajax({
-            url: '/update_item',
-            method: 'POST',
-            data: {
-                id: id,
-                name: name,
-                price: price,
-            },
-            success: function(response) {
-                alert(response, "alert");
-            },
-            error: function(xhr) {
-                alert('Error: ' + xhr.status + ' ' + xhr.statusText);
-            }
-        });
+        var rawPrice = $('td:eq(2)', $(this).parent().parent()).text();
+
+        var price = Number(rawPrice);
+        if(isNaN(price)) {
+            alert(`Unable to save item '${id}' due to invalid price '${rawPrice}'... `)
+        }else{
+            $.ajax({
+                url: '/update_item',
+                method: 'POST',
+                data: {
+                    id: id,
+                    name: name,
+                    price: price,
+                },
+                success: function(response) {
+                    alert(response, "alert");
+                },
+                error: function(xhr) {
+                    alert('Error: ' + xhr.status + ' ' + xhr.statusText);
+                }
+            });
+        }
     });
 
     // Delete button click handler

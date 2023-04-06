@@ -19,8 +19,8 @@
         <td>{{ item['id'] }}</td>
         <td>{{ item['name'] }}</td>
         <td>{{ item['quantity'] }}</td>
-        <td>{{ item['price'] }}</td>
-        <td>${{ "%.2f" | format (item['quantity'] * (item['price'] | replace('$', '') | float))  }}</td>
+        <td>${{ "%.2f" | format (item['price']) }}</td>
+        <td>${{ "%.2f" | format (item['quantity'] * item['price']) }}</td>
       </tr>
       {% endfor %}
       <tr class="border-none fw-medium fs-5">
@@ -39,7 +39,7 @@
   // set the cart items on page load
   var items = '{% if cart %}{{ cart|tojson }}{% else %}[]{% endif %}';
   var cart = JSON.parse(items);
-  var cartTotal = cart.map(item => item.price.replace("$","") * item.quantity).reduce((a, b) => a + b, 0); //TODO - update when price is not a string
+  var cartTotal = cart.map(item => item.price * item.quantity).reduce((a, b) => a + b, 0);
   $("#cart-total").text("$" + cartTotal.toFixed(2))
 </script>
 

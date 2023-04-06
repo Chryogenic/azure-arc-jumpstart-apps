@@ -35,7 +35,7 @@
           // update cart count and cart value
           var cart = response;
           var itemCount = cart.map(item => item.quantity).reduce((a, b) => a + b, 0);
-          var cartTotal = cart.map(item => item.price.replace("$","") * item.quantity).reduce((a, b) => a + b, 0); //TODO - update when price is not a string
+          var cartTotal = cart.map(item => item.price * item.quantity).reduce((a, b) => a + b, 0);
           
           $("#cart-count").text(itemCount)
           $("#cart-value").text("$" + cartTotal.toFixed(2))

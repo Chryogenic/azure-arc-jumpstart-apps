@@ -8,7 +8,6 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
-      <th scope="col">Description</th>
       <th scope="col">Unit Price</th>
       <th scope="col">Actions</th>
     </tr>
@@ -18,8 +17,7 @@
       <tr class="border-grey border-2">
         <td class="fs-5">{{ item.id }}</td>
         <td class="fs-5" contenteditable="true">{{ item.name }}</td>
-        <td class="fs-5" contenteditable="true">{{ item.name }}</td>
-        <td class="fs-5" contenteditable="true">{{ item.price }}</td>
+        <td class="fs-5" contenteditable="true">{{ "%.2f" | format(item.price) }}</td>
         <td>
           <button type="button" class="btn btn-primary" data-id="{{ item.id }}">Save</button>
           <button type="button" class="btn btn-danger" data-id="{{ item.id }}">Delete</button>

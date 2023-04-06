@@ -50,7 +50,7 @@
   var items = '{% if session["cart"] %}{{ session["cart"]|tojson }}{% else %}[]{% endif %}';
   var cart = JSON.parse(items);
   var itemCount = cart.map(item => item.quantity).reduce((a, b) => a + b, 0);
-  var cartTotal = cart.map(item => item.price.replace("$","") * item.quantity).reduce((a, b) => a + b, 0); //TODO - update when price is not a string
+  var cartTotal = cart.map(item => item.price * item.quantity).reduce((a, b) => a + b, 0);
   
   //update the checkout button with the count & total
   $("#cart-count").text(itemCount)
